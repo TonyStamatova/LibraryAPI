@@ -8,4 +8,8 @@
     <PackageReference Include="EntityFramework" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Library.Data.Models\Library.Data.Models.csproj" />
+  </ItemGroup>
+
 </Project>
