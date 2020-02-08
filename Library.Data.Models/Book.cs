@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using Library.Data.Models.Enumerations;
 
 namespace Library.Data.Models
@@ -22,5 +21,7 @@ namespace Library.Data.Models
         public ICollection<string> KeyWords { get; set; } = new HashSet<string>();
 
         public string Description { get; set; }
+
+        public string ContentPath { get; set; }
     }
 }
