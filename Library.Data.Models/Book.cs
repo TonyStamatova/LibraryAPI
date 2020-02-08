@@ -18,7 +18,7 @@ namespace Library.Data.Models
 
         public Language Language { get; set; }
 
-        public ICollection<string> KeyWords { get; set; } = new HashSet<string>();
+        public ICollection<BookKeyWord> KeyWords { get; set; } = new HashSet<BookKeyWord>();
 
         public string Description { get; set; }
 
