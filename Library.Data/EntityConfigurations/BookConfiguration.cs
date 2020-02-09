@@ -1,8 +1,6 @@
-﻿using Library.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Text;
+﻿using System.Data.Entity.ModelConfiguration;
+
+using Library.Data.Models;
 
 namespace Library.Data.EntityConfigurations
 {
