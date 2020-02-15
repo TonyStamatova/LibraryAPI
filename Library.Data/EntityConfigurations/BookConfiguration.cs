@@ -10,9 +10,11 @@ namespace Library.Data.EntityConfigurations
         {
             this.HasKey(b => b.Id);
 
-            this.HasRequired(b => b.Title);
+            this.Property(b => b.Title)
+                .IsRequired();
 
-            this.HasRequired(b => b.ContentPath);
+            this.Property(b => b.ContentPath)
+                .IsRequired();
 
             this.HasRequired(b => b.Author)
                 .WithMany(a => a.Books)

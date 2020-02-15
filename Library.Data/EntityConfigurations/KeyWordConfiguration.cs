@@ -10,7 +10,8 @@ namespace Library.Data.EntityConfigurations
         {
             this.HasKey(kw => kw.Id);
 
-            this.HasRequired(kw => kw.Word);
+            this.Property(kw => kw.Word)
+                .IsRequired();
 
             this.HasMany(kw => kw.Books)
                 .WithRequired(bkw => bkw.KeyWord)

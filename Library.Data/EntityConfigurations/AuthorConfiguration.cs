@@ -10,7 +10,8 @@ namespace Library.Data.EntityConfigurations
         {
             this.HasKey(a => a.Id);
 
-            this.HasRequired(a => a.FirstName);
+            this.Property(a => a.FirstName)
+                .IsRequired();
         }
     }
 }
