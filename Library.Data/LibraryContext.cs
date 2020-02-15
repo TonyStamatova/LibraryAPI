@@ -20,6 +20,7 @@ namespace Library.Data
             modelBuilder.Configurations.Add(new AuthorConfiguration());
             modelBuilder.Configurations.Add(new BookConfiguration());
             modelBuilder.Configurations.Add(new KeyWordConfiguration());
+            modelBuilder.Configurations.Add(new BookKeyWordConfiguration());
         }
     }
 }
