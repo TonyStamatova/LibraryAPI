@@ -4,6 +4,7 @@ using System.Web.Mvc;
 
 using Library.Data;
 using SimpleInjector;
+using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
 
 namespace LibraryApi
@@ -13,6 +14,7 @@ namespace LibraryApi
         public static void Register()
         {
             var container = new Container();
+            container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
 
             //register services here
             container.Register(() => new LibraryContext(), Lifestyle.Scoped);
