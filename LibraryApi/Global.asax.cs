@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
+using LibraryApi.App_Start.DependencyConfigurations;
+
 namespace LibraryApi
 {
     public class WebApiApplication : System.Web.HttpApplication
@@ -17,6 +19,7 @@ namespace LibraryApi
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            SimpleInjectorConfig.Register();
         }
     }
 }
