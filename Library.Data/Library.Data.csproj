@@ -12,4 +12,10 @@
     <ProjectReference Include="..\Library.Data.Models\Library.Data.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Update="Migrations\202002151220177_Initial.resx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

@@ -45,6 +45,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -202,6 +203,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Library.Data.Models\Library.Data.Models.csproj">
+      <Project>{CD7471E7-49F1-4E9D-898D-CD7D59B6AB4C}</Project>
+      <Name>Library.Data.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Library.Data\Library.Data.csproj">
       <Project>{bbb78619-f175-4025-8242-9172d6078952}</Project>
       <Name>Library.Data</Name>
