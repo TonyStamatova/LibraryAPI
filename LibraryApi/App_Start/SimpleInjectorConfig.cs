@@ -1,6 +1,8 @@
-﻿using System.Web.Http;
+﻿using System.Reflection;
+using System.Web.Http;
 using System.Web.Mvc;
 
+using Library.Data;
 using SimpleInjector;
 using SimpleInjector.Integration.Web.Mvc;
 
@@ -13,8 +15,9 @@ namespace LibraryApi
             var container = new Container();
 
             //register services here
+            container.Register(() => new LibraryContext(), Lifestyle.Scoped);
 
-            container.RegisterWebApiControllers(new HttpConfiguration());
+            container.RegisterWebApiControllers(new HttpConfiguration(), Assembly.GetExecutingAssembly());
 
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
         }
