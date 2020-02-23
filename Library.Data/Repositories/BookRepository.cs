@@ -18,15 +18,17 @@ namespace Library.Data.Repositories
             this.context = context;
         }
 
-        public async Task<Book[]> GetAllBooksByGenreAsync(string genre = "fiction")
+        public async Task<Book[]> GetAllBooksByGenreAsync(string genre = "other")
         {
-            if (Enum.TryParse(genre, true, out Genre genreEnum))
+            Enum.TryParse(genre, true, out Genre genreEnum);
+
+            if (genreEnum == Genre.Other)
             {
                 throw new ArgumentException("There are no records for books of this genre.");
             }
 
             IQueryable<Book> query = context.Books
-                .Where(b => b.Genre.Contains(genreEnum));
+                .Where(b => b.Genre == genreEnum);
 
             return await query.ToArrayAsync();
         }
