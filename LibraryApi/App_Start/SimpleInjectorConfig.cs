@@ -2,11 +2,12 @@
 using System.Reflection;
 using System.Web.Http;
 using System.Web.Mvc;
-
+using AutoMapper;
 using Library.Data;
 using Library.Data.Repositories;
 using Library.Data.Repositories.Contracts;
 using LibraryApi.Controllers;
+using LibraryApi.Models.MappingProfiles;
 using SimpleInjector;
 using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
@@ -21,9 +22,18 @@ namespace LibraryApi
             var container = new Container();
             container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
 
-            //register services here
+            #region service registration
             container.Register(() => new LibraryContext(), Lifestyle.Scoped);
+
             container.Register<IBookRepository, BookRepository>(Lifestyle.Scoped);
+
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new BookProfile());
+            });
+
+            container.RegisterInstance(config.CreateMapper()); 
+            #endregion
 
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 
