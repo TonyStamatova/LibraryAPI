@@ -26,7 +26,9 @@ namespace Library.Data.Repositories
             }
 
             IQueryable<Book> query = context.Books
-                .Where(b => b.Genre == genre);
+                .Where(b => b.Genre == genre)
+                .Include(b => b.Author)
+                .Include(b => b.KeyWords.Select(bkw => bkw.KeyWord));
 
             return await query.ToArrayAsync();
         }

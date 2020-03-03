@@ -17,7 +17,7 @@ namespace Library.Data.Models
 
         public GenreType GenreType { get; set; }
 
-        public Language Language { get; set; }
+        public Language? Language { get; set; }
 
         public ICollection<BookKeyWord> KeyWords { get; set; } = new HashSet<BookKeyWord>();
 
