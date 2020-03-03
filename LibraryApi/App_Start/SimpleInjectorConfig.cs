@@ -1,16 +1,14 @@
-﻿using System.Linq;
-using System.Reflection;
-using System.Web.Http;
-using System.Web.Mvc;
+﻿using System.Web.Http;
+
 using AutoMapper;
+
 using Library.Data;
 using Library.Data.Repositories;
 using Library.Data.Repositories.Contracts;
-using LibraryApi.Controllers;
 using LibraryApi.Models.MappingProfiles;
+
 using SimpleInjector;
 using SimpleInjector.Integration.Web;
-using SimpleInjector.Integration.Web.Mvc;
 using SimpleInjector.Integration.WebApi;
 
 namespace LibraryApi
