@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -28,7 +29,7 @@ namespace LibraryApi.Controllers
             try
             {
                 var books = await repo.GetAllBooksByGenreAsync((Genre)genre);
-                var result = this.mapper.Map<BookModel>(books);
+                var result = this.mapper.Map<IEnumerable<BookModel>>(books);
 
                 return Ok(result);
             }
