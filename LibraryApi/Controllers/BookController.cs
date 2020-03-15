@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 
 using AutoMapper;
-
+using Library.Data.Models;
 using Library.Data.Models.Enumerations;
 using Library.Data.Repositories.Contracts;
 using LibraryApi.Models;
@@ -41,6 +41,33 @@ namespace LibraryApi.Controllers
             {
                 return InternalServerError(ex);
             }
+        }
+
+        [HttpPost]
+        public async Task<IHttpActionResult> Post(BookModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Book book = this.mapper.Map<Book>(model);
+                    this.repo.AddBook(book);
+
+                    if (await this.repo.SaveChangesAsync())
+                    {
+                        BookModel newModel = this.mapper.Map<BookModel>(book);
+                        string location = Url.Route("", new { });
+
+                        return Created(location, newModel);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return BadRequest();
         }
     }
 }
