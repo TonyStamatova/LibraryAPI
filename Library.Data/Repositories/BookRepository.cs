@@ -18,6 +18,11 @@ namespace Library.Data.Repositories
             this.context = context;
         }
 
+        public async Task<bool> SaveChangesAsync()
+        {
+            return (await context.SaveChangesAsync()) > 0;
+        }
+
         public async Task<Book[]> GetAllBooksByGenreAsync(Genre genre)
         {
             if (genre == Genre.Other)
@@ -31,6 +36,12 @@ namespace Library.Data.Repositories
                 .Include(b => b.KeyWords.Select(bkw => bkw.KeyWord));
 
             return await query.ToArrayAsync();
+        }
+
+        public void AddBook(Book book)
+        {
+            this.context.Books
+                .Add(book);
         }
     }
 }
