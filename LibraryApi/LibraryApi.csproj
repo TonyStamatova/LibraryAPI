@@ -184,6 +184,7 @@
     </Compile>
     <Compile Include="Models\AuthorModel.cs" />
     <Compile Include="Models\BookModel.cs" />
+    <Compile Include="Models\MappingProfiles\AuthorProfile.cs" />
     <Compile Include="Models\MappingProfiles\BookProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

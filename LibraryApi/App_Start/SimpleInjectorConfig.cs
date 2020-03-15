@@ -28,6 +28,7 @@ namespace LibraryApi
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new BookProfile());
+                cfg.AddProfile(new AuthorProfile());
             });
 
             container.RegisterInstance(config.CreateMapper()); 
