@@ -32,13 +32,37 @@ namespace LibraryApi.Models.MappingProfiles
 
             this.CreateMap<BookModel, Book>()
                 .ForMember(
+                    b => b.Author,
+                    opt => opt.MapFrom(
+                        m => m.Author))
+                .ForMember(
                     b => b.Genre,
                     opt => opt.MapFrom(
                         m => Enum.Parse(typeof(Genre), m.Genre)))
                 .ForMember(
                     b => b.Language,
                     opt => opt.MapFrom(
-                        m => Enum.Parse(typeof(Language), m.Language)));
+                        m => Enum.Parse(typeof(Language), m.Language)))
+                .ForMember(
+                    b => b.KeyWords,
+                    opt => opt.MapFrom(
+                        m => m.KeyWords
+                            .Select(str => new BookKeyWord
+                            {
+                                KeyWord = new KeyWord
+                                {
+                                    Word = str
+                                }
+                            })))
+                .AfterMap(
+                    (m, b) => b.GenreType = 
+                        b.Genre == 0
+                            ? GenreType.Other
+                            : (int)b.Genre < 100
+                                ? GenreType.Fiction
+                                : GenreType.NonFiction)
+                .AfterMap(
+                    (m, b) => b.ContentPath = string.Empty);
         }
     }
 }
