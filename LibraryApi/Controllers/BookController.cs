@@ -24,6 +24,14 @@ namespace LibraryApi.Controllers
         }
 
         [HttpGet]
+        public async Task<IHttpActionResult> Get(string title)
+        {
+            //TODO: get book by title
+
+            return Ok();
+        }
+
+        [HttpGet]
         public async Task<IHttpActionResult> Get(int genre = 0)
         {
             try
@@ -32,10 +40,6 @@ namespace LibraryApi.Controllers
                 var result = this.mapper.Map<IEnumerable<BookModel>>(books);
 
                 return Ok(result);
-            }
-            catch (ArgumentException)
-            {
-                return NotFound();
             }
             catch (SqlException ex)
             {
@@ -56,7 +60,7 @@ namespace LibraryApi.Controllers
                     if (await this.repo.SaveChangesAsync())
                     {
                         BookModel newModel = this.mapper.Map<BookModel>(book);
-                        string location = Url.Route("", new { });
+                        string location = Url.Route("GetBookByTitle", new { title = newModel.Title });
 
                         return Created(location, newModel);
                     }

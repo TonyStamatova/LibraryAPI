@@ -25,11 +25,6 @@ namespace Library.Data.Repositories
 
         public async Task<Book[]> GetAllBooksByGenreAsync(Genre genre)
         {
-            if (genre == Genre.Other)
-            {
-                throw new ArgumentException("There are no records for books of this genre.");
-            }
-
             IQueryable<Book> query = context.Books
                 .Where(b => b.Genre == genre)
                 .Include(b => b.Author)

@@ -19,6 +19,12 @@ namespace LibraryApi
                 routeTemplate: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapHttpRoute(
+                name: "GetBookByTitle",
+                routeTemplate: "{controller}/{action}/{title}",
+                defaults: new { controller = "Book", action = "Get", title = "" }
+            );
         }
     }
 }
