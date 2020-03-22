@@ -14,13 +14,13 @@ namespace LibraryApi.Models.MappingProfiles
         {
             this.CreateMap<Book, BookModel>()
                 .ForMember(
-                    m => m.Author,
-                    opt => opt.MapFrom(
-                        b => string.Join(" ", new string[] { b.Author.FirstName, b.Author.MiddleName, b.Author.LastName, b.Author.Pseudonym }.Where(x => !string.IsNullOrWhiteSpace(x)))))
-                .ForMember(
                     m => m.Genre, 
                     opt => opt.MapFrom(
                         b => Enum.GetName(typeof(Genre), b.Genre)))
+                .ForMember(
+                    m => m.GenreType,
+                    opt => opt.MapFrom(
+                        b => Enum.GetName(typeof(GenreType), b.GenreType)))
                 .ForMember(
                     m => m.Language, 
                     opt => opt.MapFrom(
@@ -29,6 +29,16 @@ namespace LibraryApi.Models.MappingProfiles
                     m => m.KeyWords, 
                     opt => opt.MapFrom(
                         b => b.KeyWords.Select(kw => kw.KeyWord.Word).ToList()));
+
+            this.CreateMap<BookModel, Book>()
+                .ForMember(
+                    b => b.Genre,
+                    opt => opt.MapFrom(
+                        m => Enum.Parse(typeof(Genre), m.Genre)))
+                .ForMember(
+                    b => b.Language,
+                    opt => opt.MapFrom(
+                        m => Enum.Parse(typeof(Language), m.Language)));
         }
     }
 }

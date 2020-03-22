@@ -10,6 +10,8 @@ namespace LibraryApi.Models
 
         public string Genre { get; set; }
 
+        public string GenreType { get; set; }
+
         public string Language { get; set; }
 
         public ICollection<string> KeyWords { get; set; }
