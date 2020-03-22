@@ -8,9 +8,8 @@ namespace LibraryApi.Models.MappingProfiles
     {
         public AuthorProfile()
         {
-            this.CreateMap<Author, AuthorModel>();
-
-            this.CreateMap<AuthorModel, Author>();
+            this.CreateMap<Author, AuthorModel>()
+                .ReverseMap();
         }
     }
 }
