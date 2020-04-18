@@ -60,6 +60,11 @@ namespace LibraryApi.Controllers
         {
             try
             {
+                if (await this.repo.GetBooksByTitleAsync(model.Title) != null)
+                {
+                    ModelState.AddModelError("Title", "This book is already in the library");
+                }
+
                 if (ModelState.IsValid)
                 {
                     Book book = this.mapper.Map<Book>(model);
@@ -79,7 +84,7 @@ namespace LibraryApi.Controllers
                 return InternalServerError(ex);
             }
 
-            return BadRequest();
+            return BadRequest(ModelState);
         }
     }
 }
