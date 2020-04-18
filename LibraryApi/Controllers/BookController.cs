@@ -94,7 +94,7 @@ namespace LibraryApi.Controllers
             {
                 var book = this.repo.GetBookById(id);
 
-                if (book != null)
+                if (book == null)
                 {
                     return NotFound();
                 }
