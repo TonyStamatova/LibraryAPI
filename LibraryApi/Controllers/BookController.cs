@@ -24,11 +24,19 @@ namespace LibraryApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> Get(string title)
+        public async Task<IHttpActionResult> Get(string partOfTitle)
         {
-            //TODO: get book by title
+            try
+            {
+                var books = await repo.GetBooksByTitleAsync(partOfTitle);
+                var result = this.mapper.Map<IEnumerable<BookModel>>(books);
 
-            return Ok();
+                return Ok(result);
+            }
+            catch (SqlException ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
         [HttpGet]
@@ -60,7 +68,7 @@ namespace LibraryApi.Controllers
                     if (await this.repo.SaveChangesAsync())
                     {
                         BookModel newModel = this.mapper.Map<BookModel>(book);
-                        string location = Url.Route("GetBookByTitle", new { title = newModel.Title });
+                        string location = Url.Route("GetBooksByTitle", new { title = newModel.Title });
 
                         return Created(location, newModel);
                     }

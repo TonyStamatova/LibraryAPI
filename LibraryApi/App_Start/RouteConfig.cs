@@ -21,7 +21,7 @@ namespace LibraryApi
             );
 
             routes.MapHttpRoute(
-                name: "GetBookByTitle",
+                name: "GetBooksByTitle",
                 routeTemplate: "{controller}/{action}/{title}",
                 defaults: new { controller = "Book", action = "Get", title = "" }
             );
