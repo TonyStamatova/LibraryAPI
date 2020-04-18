@@ -92,7 +92,7 @@ namespace LibraryApi.Controllers
         {
             try
             {
-                var book = this.repo.GetBookById(id);
+                var book = await this.repo.GetBookById(id);
 
                 if (book == null)
                 {

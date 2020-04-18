@@ -14,7 +14,7 @@ namespace Library.Data.Repositories.Contracts
         #endregion
 
         #region READ
-        Book GetBookById(int id);
+        Task<Book> GetBookById(int id);
 
         Task<Book[]> GetBooksByTitleAsync(string partOfTitle);
 
