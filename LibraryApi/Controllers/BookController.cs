@@ -86,5 +86,34 @@ namespace LibraryApi.Controllers
 
             return BadRequest(ModelState);
         }
+
+        [HttpPut]
+        public async Task<IHttpActionResult> Put(int id, BookModel model)
+        {
+            try
+            {
+                var book = this.repo.GetBookById(id);
+
+                if (book != null)
+                {
+                    return NotFound();
+                }
+
+                this.mapper.Map(model, book);
+
+                if (await this.repo.SaveChangesAsync())
+                {
+                    return Ok(this.mapper.Map<BookModel>(book));
+                }
+                else
+                {
+                    return InternalServerError();
+                }
+            }
+            catch (SqlException ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
     }
 }
