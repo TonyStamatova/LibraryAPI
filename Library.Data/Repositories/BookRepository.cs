@@ -23,6 +23,16 @@ namespace Library.Data.Repositories
             return (await context.SaveChangesAsync()) > 0;
         }
 
+        public async Task<Book[]> GetBooksByTitleAsync(string partOfTitle)
+        {
+            IQueryable<Book> query = context.Books
+                .Where(b => b.Title.ToLower().Contains(partOfTitle.ToLower()))
+                .Include(b => b.Author)
+                .Include(b => b.KeyWords.Select(bkw => bkw.KeyWord));
+
+            return await query.ToArrayAsync();
+        }
+
         public async Task<Book[]> GetAllBooksByGenreAsync(Genre genre)
         {
             IQueryable<Book> query = context.Books

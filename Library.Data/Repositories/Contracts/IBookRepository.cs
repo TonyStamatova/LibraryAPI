@@ -9,6 +9,8 @@ namespace Library.Data.Repositories.Contracts
     {
         Task<bool> SaveChangesAsync();
 
+        Task<Book[]> GetBooksByTitleAsync(string partOfTitle);
+
         Task<Book[]> GetAllBooksByGenreAsync(Genre genre);
 
         void AddBook(Book book);
