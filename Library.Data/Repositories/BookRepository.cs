@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,6 +22,20 @@ namespace Library.Data.Repositories
             return (await context.SaveChangesAsync()) > 0;
         }
 
+        #region CREATE
+        public void AddBook(Book book)
+        {
+            this.context.Books
+                .Add(book);
+        } 
+        #endregion
+
+        #region READ
+        public Book GetBookById(int id)
+        {
+            return context.Books.Find(id);
+        }
+
         public async Task<Book[]> GetBooksByTitleAsync(string partOfTitle)
         {
             IQueryable<Book> query = context.Books
@@ -42,11 +55,12 @@ namespace Library.Data.Repositories
 
             return await query.ToArrayAsync();
         }
+        #endregion
 
-        public void AddBook(Book book)
-        {
-            this.context.Books
-                .Add(book);
-        }
+        #region UPDATE
+        #endregion
+
+        #region DALETE
+        #endregion
     }
 }

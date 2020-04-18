@@ -9,10 +9,22 @@ namespace Library.Data.Repositories.Contracts
     {
         Task<bool> SaveChangesAsync();
 
+        #region CREATE
+        void AddBook(Book book);
+        #endregion
+
+        #region READ
+        Book GetBookById(int id);
+
         Task<Book[]> GetBooksByTitleAsync(string partOfTitle);
 
         Task<Book[]> GetAllBooksByGenreAsync(Genre genre);
+        #endregion
 
-        void AddBook(Book book);
+        #region UPDATE
+        #endregion
+
+        #region DELETE
+        #endregion
     }
 }
