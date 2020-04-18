@@ -24,11 +24,11 @@ namespace LibraryApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> Get(string partOfTitle)
+        public async Task<IHttpActionResult> Get(string title)
         {
             try
             {
-                var books = await repo.GetBooksByTitleAsync(partOfTitle);
+                var books = await repo.GetBooksByTitleAsync(title);
                 var result = this.mapper.Map<IEnumerable<BookModel>>(books);
 
                 return Ok(result);
