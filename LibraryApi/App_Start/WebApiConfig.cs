@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.Web.Http;
+
+using Newtonsoft.Json.Serialization;
+
 using System.Web.Http;
 
 namespace LibraryApi
@@ -17,6 +17,13 @@ namespace LibraryApi
                 .SerializerSettings
                 .ContractResolver = 
                     new CamelCasePropertyNamesContractResolver();
+
+            config.AddApiVersioning(cfg =>
+            {
+                cfg.DefaultApiVersion = new ApiVersion(1, 1);
+                cfg.AssumeDefaultVersionWhenUnspecified = true;
+                cfg.ReportApiVersions = true;
+            });
 
             // Web API routes
             config.MapHttpAttributeRoutes();
