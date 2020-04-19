@@ -25,7 +25,7 @@ namespace Library.Data.Repositories.Contracts
         #endregion
 
         #region DELETE
-        void DeleteBook(Book book);
+        Task DeleteBook(Book book);
         #endregion
     }
 }

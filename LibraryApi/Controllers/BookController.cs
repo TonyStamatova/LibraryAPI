@@ -127,9 +127,7 @@ namespace LibraryApi.Controllers
                     return NotFound();
                 }
 
-                //TODO: First delete all BookKeyWord records associated with the book (foreign key constraint conflict when deleting a book)
-
-                this.repo.DeleteBook(book);
+                await this.repo.DeleteBook(book);
 
                 if (await this.repo.SaveChangesAsync())
                 {

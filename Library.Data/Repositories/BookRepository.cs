@@ -61,8 +61,12 @@ namespace Library.Data.Repositories
         #endregion
 
         #region DALETE
-        public void DeleteBook(Book book)
+        public async Task DeleteBook(Book book)
         {
+            await this.context.BooksKeyWords
+                .Where(bkw => bkw.BookId == book.Id)
+                .ForEachAsync(bkw => this.context.BooksKeyWords.Remove(bkw));
+               
             this.context.Books
                 .Remove(book);
         }
