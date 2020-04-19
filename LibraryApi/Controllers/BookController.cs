@@ -92,7 +92,7 @@ namespace LibraryApi.Controllers
         {
             try
             {
-                var book = await this.repo.GetBookById(id);
+                var book = await this.repo.GetBookByIdAsync(id);
 
                 if (book == null)
                 {
@@ -104,6 +104,36 @@ namespace LibraryApi.Controllers
                 if (await this.repo.SaveChangesAsync())
                 {
                     return Ok(this.mapper.Map<BookModel>(book));
+                }
+                else
+                {
+                    return InternalServerError();
+                }
+            }
+            catch (SqlException ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        public async Task<IHttpActionResult> Delete(int id)
+        {
+            try
+            {
+                var book = await this.repo.GetBookByIdAsync(id);
+
+                if (book == null)
+                {
+                    return NotFound();
+                }
+
+                //TODO: First delete all BookKeyWord records associated with the book (foreign key constraint conflict when deleting a book)
+
+                this.repo.DeleteBook(book);
+
+                if (await this.repo.SaveChangesAsync())
+                {
+                    return Ok();
                 }
                 else
                 {
