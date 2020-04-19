@@ -1,4 +1,5 @@
 ﻿using Microsoft.Web.Http;
+using Microsoft.Web.Http.Versioning;
 
 using Newtonsoft.Json.Serialization;
 
@@ -15,7 +16,7 @@ namespace LibraryApi
             config.Formatters
                 .JsonFormatter
                 .SerializerSettings
-                .ContractResolver = 
+                .ContractResolver =
                     new CamelCasePropertyNamesContractResolver();
 
             config.AddApiVersioning(cfg =>
@@ -23,6 +24,7 @@ namespace LibraryApi
                 cfg.DefaultApiVersion = new ApiVersion(1, 1);
                 cfg.AssumeDefaultVersionWhenUnspecified = true;
                 cfg.ReportApiVersions = true;
+                cfg.ApiVersionReader = ApiVersionReader.Combine(new HeaderApiVersionReader("X-Version"));
             });
 
             // Web API routes
