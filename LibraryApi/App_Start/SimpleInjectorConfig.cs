@@ -1,17 +1,18 @@
-﻿using System.Reflection;
-using System.Web.Http;
-using System.Web.Mvc;
+﻿using System.Web.Http;
+
+using AutoMapper;
 
 using Library.Data;
 using Library.Data.Repositories;
 using Library.Data.Repositories.Contracts;
+using LibraryApi.Models.MappingProfiles;
 
 using SimpleInjector;
 using SimpleInjector.Integration.Web;
-using SimpleInjector.Integration.Web.Mvc;
+using SimpleInjector.Integration.WebApi;
 
 namespace LibraryApi
-{ 
+{
     public class SimpleInjectorConfig
     {
         public static void Register()
@@ -19,13 +20,25 @@ namespace LibraryApi
             var container = new Container();
             container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
 
-            //register services here
+            #region service registration
             container.Register(() => new LibraryContext(), Lifestyle.Scoped);
-            container.Register<IBookRepository, BookRepository>();
 
-            container.RegisterWebApiControllers(new HttpConfiguration(), Assembly.GetExecutingAssembly());
+            container.Register<IBookRepository, BookRepository>(Lifestyle.Scoped);
 
-            DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new BookProfile());
+                cfg.AddProfile(new AuthorProfile());
+            });
+
+            container.RegisterInstance(config.CreateMapper()); 
+            #endregion
+
+            container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
+
+            container.Verify();
+
+            GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
         }
     }
 }

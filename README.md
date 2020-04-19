@@ -1,2 +1,2 @@
 # LibraryAPI
-Web API for centralised book library 
+Web API for a centralised book library 

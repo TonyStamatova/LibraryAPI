@@ -13,11 +13,11 @@ namespace Library.Data.Models
         public int AuthorId { get; set; }
         public Author Author { get; set; }
 
-        public ICollection<Genre> Genre { get; set; } = new HashSet<Genre>();
+        public Genre Genre { get; set; }
 
         public GenreType GenreType { get; set; }
 
-        public Language Language { get; set; }
+        public Language? Language { get; set; }
 
         public ICollection<BookKeyWord> KeyWords { get; set; } = new HashSet<BookKeyWord>();
 
