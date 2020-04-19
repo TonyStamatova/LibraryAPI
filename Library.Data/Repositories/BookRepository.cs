@@ -31,7 +31,7 @@ namespace Library.Data.Repositories
         #endregion
 
         #region READ
-        public async Task<Book> GetBookById(int id)
+        public async Task<Book> GetBookByIdAsync(int id)
         {
             return await context.Books.FindAsync(id);
         }
