@@ -61,6 +61,11 @@ namespace Library.Data.Repositories
         #endregion
 
         #region DALETE
+        public void DeleteBook(Book book)
+        {
+            this.context.Books
+                .Remove(book);
+        }
         #endregion
     }
 }
